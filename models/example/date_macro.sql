@@ -1,12 +1,10 @@
-WITH stg_baseball_venue AS(
+
   Select gameid, 
   startTime,
   ROUND((attendance/venueCapacity)*100 , 2) as venue_utilisation_perc, 
   homeTeamName, 
-  awayTeamName
+  awayTeamName,
+  {{get_date_parts('startTime')}} as date_extract
   from dbt-exploration-449811.baseball.games_post_wide
-  group by 1,2,3,4,5
-  
-)
 
-select * from stg_baseball_venue
+  
